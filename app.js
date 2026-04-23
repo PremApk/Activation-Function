@@ -329,12 +329,34 @@ let currentCategory = 'all';
 let activeModal = null;
 let modalChart = null;
 const cardCanvases = new Map(); // id -> canvas element
+const canvasContexts = new Map(); // id -> cached 2d context
+const visibleCards = new Set(); // ids of cards currently in viewport
+let sliderRafId = null; // rAF throttle for slider
 
 // ── Initialize ───────────────────────────────────────────────────────
 function init() {
     renderCards();
+    setupVisibilityObserver();
     updateSlider(0);
     setupEventListeners();
+}
+
+// ── Visibility Observer (only redraw visible cards) ──────────────────
+function setupVisibilityObserver() {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const id = entry.target.dataset.id;
+            if (entry.isIntersecting) {
+                visibleCards.add(id);
+            } else {
+                visibleCards.delete(id);
+            }
+        });
+    }, { rootMargin: '100px' });
+
+    cardsGrid.querySelectorAll('.af-card').forEach(card => {
+        observer.observe(card);
+    });
 }
 
 // ── Card Rendering ───────────────────────────────────────────────────
@@ -381,17 +403,27 @@ function renderCards() {
 
 // ── Mini Graph Drawing (Canvas) ──────────────────────────────────────
 function drawMiniGraph(canvas, fn, inputX) {
-    const ctx = canvas.getContext('2d');
+    // Use cached context to avoid repeated getContext calls
+    let ctx = canvasContexts.get(fn.id);
+    if (!ctx) {
+        ctx = canvas.getContext('2d');
+        canvasContexts.set(fn.id, ctx);
+    }
     const dpr = window.devicePixelRatio || 1;
     const rect = canvas.getBoundingClientRect();
     const w = rect.width || canvas.width / 2;
     const h = rect.height || canvas.height / 2;
 
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    ctx.scale(dpr, dpr);
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
+    // Only resize canvas buffer if dimensions actually changed
+    const targetW = Math.round(w * dpr);
+    const targetH = Math.round(h * dpr);
+    if (canvas.width !== targetW || canvas.height !== targetH) {
+        canvas.width = targetW;
+        canvas.height = targetH;
+        canvas.style.width = w + 'px';
+        canvas.style.height = h + 'px';
+    }
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
     ctx.clearRect(0, 0, w, h);
 
@@ -403,16 +435,20 @@ function drawMiniGraph(canvas, fn, inputX) {
     const xMin = -5, xMax = 5;
     let yMin = -2, yMax = 2;
 
-    // Sample to find actual range
-    const samples = [];
-    for (let i = 0; i <= 200; i++) {
-        const x = xMin + (xMax - xMin) * (i / 200);
+    // Sample to find actual range — use loop min/max (faster than spread)
+    const SAMPLES = 100;
+    let sMin = Infinity, sMax = -Infinity;
+    let sampleCount = 0;
+    for (let i = 0; i <= SAMPLES; i++) {
+        const x = xMin + (xMax - xMin) * (i / SAMPLES);
         const y = fn.compute(x);
-        if (isFinite(y)) samples.push(y);
+        if (isFinite(y)) {
+            if (y < sMin) sMin = y;
+            if (y > sMax) sMax = y;
+            sampleCount++;
+        }
     }
-    if (samples.length > 0) {
-        const sMin = Math.min(...samples);
-        const sMax = Math.max(...samples);
+    if (sampleCount > 0) {
         const sRange = sMax - sMin || 1;
         yMin = sMin - sRange * 0.15;
         yMax = sMax + sRange * 0.15;
@@ -449,8 +485,8 @@ function drawMiniGraph(canvas, fn, inputX) {
     ctx.lineCap = 'round';
 
     let started = false;
-    for (let i = 0; i <= 200; i++) {
-        const x = xMin + (xMax - xMin) * (i / 200);
+    for (let i = 0; i <= SAMPLES; i++) {
+        const x = xMin + (xMax - xMin) * (i / SAMPLES);
         const y = fn.compute(x);
         if (!isFinite(y)) continue;
         const cx = toCanvasX(x);
@@ -472,8 +508,8 @@ function drawMiniGraph(canvas, fn, inputX) {
     ctx.beginPath();
     started = false;
     let firstCx = 0;
-    for (let i = 0; i <= 200; i++) {
-        const x = xMin + (xMax - xMin) * (i / 200);
+    for (let i = 0; i <= SAMPLES; i++) {
+        const x = xMin + (xMax - xMin) * (i / SAMPLES);
         const y = fn.compute(x);
         if (!isFinite(y)) continue;
         const cx = toCanvasX(x);
@@ -532,49 +568,50 @@ function drawMiniGraph(canvas, fn, inputX) {
 
 // ── Update All Cards ─────────────────────────────────────────────────
 function updateAllCards(inputX) {
+    const inputLabel = `f(${inputX.toFixed(2)})`;
     activationFunctions.forEach(fn => {
-        // Update output value
+        // Update output value text (cheap DOM update)
         const valueEl = document.getElementById(`value-${fn.id}`);
         const labelEl = valueEl?.previousElementSibling;
         if (valueEl) {
             const output = fn.compute(inputX);
             valueEl.textContent = formatOutput(output);
-
-            // Color based on sign
-            if (output > 0.001) valueEl.className = 'card-output-value';
-            else if (output < -0.001) valueEl.className = 'card-output-value';
-            else valueEl.className = 'card-output-value';
-
             valueEl.style.color = fn.accentColor;
         }
         if (labelEl) {
-            labelEl.textContent = `f(${inputX.toFixed(2)})`;
+            labelEl.textContent = inputLabel;
         }
 
-        // Redraw mini graph
-        const canvas = cardCanvases.get(fn.id);
-        if (canvas) drawMiniGraph(canvas, fn, inputX);
+        // Only redraw canvas for cards visible in viewport
+        if (visibleCards.has(fn.id)) {
+            const canvas = cardCanvases.get(fn.id);
+            if (canvas) drawMiniGraph(canvas, fn, inputX);
+        }
     });
 }
 
-// ── Slider Handling ──────────────────────────────────────────────────
+// ── Slider Handling (rAF throttled) ─────────────────────────────────
 function updateSlider(value) {
     currentInput = parseFloat(value);
     sliderValueEl.textContent = currentInput.toFixed(2);
 
-    // Update fill
+    // Update fill (cheap, do immediately)
     const pct = ((currentInput - (-5)) / 10) * 100;
     sliderFill.style.width = pct + '%';
 
-    // Update all cards
-    updateAllCards(currentInput);
+    // Throttle expensive redraws with requestAnimationFrame
+    if (sliderRafId) cancelAnimationFrame(sliderRafId);
+    sliderRafId = requestAnimationFrame(() => {
+        sliderRafId = null;
+        updateAllCards(currentInput);
 
-    // Update modal if open
-    if (activeModal) {
-        updateModalChart(activeModal);
-        const outputEl = document.getElementById('modalCurrentOutput');
-        if (outputEl) outputEl.textContent = formatOutput(activeModal.compute(currentInput));
-    }
+        // Update modal if open
+        if (activeModal) {
+            updateModalChart(activeModal);
+            const outputEl = document.getElementById('modalCurrentOutput');
+            if (outputEl) outputEl.textContent = formatOutput(activeModal.compute(currentInput));
+        }
+    });
 }
 
 // ── Format Output Number ─────────────────────────────────────────────
