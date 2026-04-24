@@ -1,0 +1,738 @@
+/* ============================================
+   NEURON BASICS PAGE - STYLES
+   Interactive educational page
+   ============================================ */
+
+/* --- Shared Nav Bar --- */
+.site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    padding: 14px 24px;
+    background: rgba(6, 7, 13, 0.88);
+    /* backdrop-filter removed for perf */
+    border-bottom: 1px solid var(--border-subtle);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.nav-brand-icon {
+    font-size: 1.3rem;
+}
+
+.nav-brand-text .gradient-text {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 18px;
+    border-radius: var(--radius-full);
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: all var(--transition-base);
+}
+
+.nav-link:hover {
+    color: var(--text-primary);
+    background: var(--bg-card);
+    border-color: var(--border-light);
+}
+
+.nav-link.active {
+    color: var(--accent-cyan);
+    background: rgba(0, 212, 255, 0.08);
+    border-color: rgba(0, 212, 255, 0.2);
+}
+
+.nav-link-icon {
+    font-size: 0.95rem;
+}
+
+/* --- Page Body Offset for Fixed Nav --- */
+.page-body {
+    padding-top: 60px;
+}
+
+/* --- Neuron Hero --- */
+.neuron-hero {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 70px 24px 50px;
+    overflow: hidden;
+}
+
+.neuron-hero .hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* --- Section Styles --- */
+.page-section {
+    position: relative;
+    z-index: 1;
+    padding: 60px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 48px;
+}
+
+.section-number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(0, 212, 255, 0.1);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    color: var(--accent-cyan);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.section-title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+}
+
+.section-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+/* --- Interactive Diagram Container --- */
+.diagram-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 32px;
+    align-items: start;
+}
+
+.diagram-wrapper.reverse {
+    grid-template-columns: 380px 1fr;
+}
+
+.diagram-container {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    padding: 32px;
+    /* backdrop-filter removed for perf */
+    position: relative;
+    overflow: hidden;
+}
+
+.diagram-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: rgba(0, 212, 255, 0.06);
+    border: 1px solid rgba(0, 212, 255, 0.12);
+    border-radius: var(--radius-full);
+    font-size: 0.82rem;
+    color: var(--accent-cyan);
+    margin-bottom: 24px;
+    animation: subtlePulse 3s ease-in-out infinite;
+}
+
+@keyframes subtlePulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* --- SVG Diagram Styles --- */
+.neuron-svg, .network-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.neuron-svg .part-group,
+.network-svg .part-group {
+    cursor: pointer;
+    transition: filter 0.3s ease, opacity 0.3s ease;
+}
+
+.neuron-svg .part-group:hover,
+.network-svg .part-group:hover {
+    filter: brightness(1.3) drop-shadow(0 0 12px currentColor);
+}
+
+.neuron-svg .part-group.active,
+.network-svg .part-group.active {
+    filter: brightness(1.4) drop-shadow(0 0 18px currentColor);
+}
+
+/* Pulse animation on parts to invite clicking */
+.part-pulse {
+    animation: partPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes partPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
+/* --- Detail Panel --- */
+.detail-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-xl);
+    /* backdrop-filter removed for perf */
+    overflow: hidden;
+    transition: all var(--transition-slow);
+    position: sticky;
+    top: 80px;
+}
+
+.detail-panel-empty {
+    padding: 48px 28px;
+    text-align: center;
+    color: var(--text-muted);
+}
+
+.detail-panel-empty .empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    opacity: 0.5;
+}
+
+.detail-panel-empty p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+}
+
+.detail-panel-content {
+    display: none;
+}
+
+.detail-panel-content.visible {
+    display: block;
+    animation: panelSlideIn 0.4s ease-out;
+}
+
+@keyframes panelSlideIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.detail-header {
+    padding: 24px 24px 20px;
+    border-bottom: 1px solid var(--border-subtle);
+}
+
+.detail-icon-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.detail-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+}
+
+.detail-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.detail-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: var(--radius-full);
+    margin-top: 4px;
+}
+
+.detail-body {
+    padding: 20px 24px 24px;
+}
+
+.detail-description {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.75;
+    margin-bottom: 20px;
+}
+
+.detail-analogy {
+    background: rgba(139, 92, 246, 0.06);
+    border: 1px solid rgba(139, 92, 246, 0.12);
+    border-radius: var(--radius-md);
+    padding: 16px;
+}
+
+.detail-analogy-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent-purple);
+    margin-bottom: 8px;
+}
+
+.detail-analogy-text {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    line-height: 1.65;
+}
+
+.detail-math {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    margin-top: 14px;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+}
+
+/* --- Comparison Section --- */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 20px;
+}
+
+.comparison-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 28px;
+    /* backdrop-filter removed for perf */
+    transition: all var(--transition-base);
+    animation: cardEnter 0.5s ease-out both;
+}
+
+.comparison-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.comparison-card-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.comparison-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+}
+
+.comparison-badge.bio {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.comparison-badge.ai {
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.comparison-titles {
+    flex: 1;
+}
+
+.comparison-bio-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-green);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.comparison-arrow {
+    color: var(--text-dim);
+    font-size: 0.8rem;
+    margin: 2px 0;
+}
+
+.comparison-ai-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent-purple);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.comparison-text {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+/* --- Key Differences Section --- */
+.differences-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+}
+
+.diff-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    /* backdrop-filter removed for perf */
+    transition: all var(--transition-base);
+}
+
+.diff-card:hover {
+    border-color: var(--border-hover);
+    background: var(--bg-card-hover);
+}
+
+.diff-card-icon {
+    font-size: 1.8rem;
+    margin-bottom: 14px;
+}
+
+.diff-card-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.diff-card-bio,
+.diff-card-ai {
+    font-size: 0.82rem;
+    line-height: 1.6;
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    margin-top: 8px;
+}
+
+.diff-card-bio {
+    background: rgba(16, 185, 129, 0.06);
+    border-left: 3px solid var(--accent-green);
+    color: var(--text-secondary);
+}
+
+.diff-card-ai {
+    background: rgba(139, 92, 246, 0.06);
+    border-left: 3px solid var(--accent-purple);
+    color: var(--text-secondary);
+}
+
+.diff-label {
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+}
+
+.diff-label.bio { color: var(--accent-green); }
+.diff-label.ai { color: var(--accent-purple); }
+
+/* --- Fun Facts --- */
+.facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+    margin-top: 48px;
+}
+
+.fact-card {
+    background: linear-gradient(135deg, rgba(0, 212, 255, 0.04), rgba(139, 92, 246, 0.04));
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    transition: all var(--transition-base);
+}
+
+.fact-card:hover {
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+}
+
+.fact-icon {
+    font-size: 1.6rem;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.fact-text {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    line-height: 1.7;
+}
+
+.fact-text strong {
+    color: var(--text-primary);
+}
+
+/* --- Neuron Page Footer --- */
+.neuron-footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 40px 24px;
+    border-top: 1px solid var(--border-subtle);
+}
+
+/* --- Animations --- */
+@keyframes cardEnter {
+    from { opacity: 0; transform: translateY(20px) scale(0.97); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.reveal-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========================================
+   RESPONSIVE BREAKPOINTS
+   ======================================== */
+
+@media (max-width: 1024px) {
+    .diagram-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-panel {
+        position: static;
+    }
+
+    .comparison-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .site-nav {
+        padding: 10px 16px;
+    }
+
+    .nav-brand {
+        font-size: 0.9rem;
+    }
+
+    .nav-link {
+        padding: 7px 12px;
+        font-size: 0.78rem;
+    }
+
+    .nav-link span:not(.nav-link-icon) {
+        display: none;
+    }
+
+    .nav-link-icon {
+        font-size: 1.1rem;
+    }
+
+    .neuron-hero {
+        padding: 50px 16px 36px;
+    }
+
+    .page-section {
+        padding: 40px 16px;
+    }
+
+    .section-title {
+        font-size: 1.4rem;
+    }
+
+    .diagram-container {
+        padding: 20px;
+    }
+
+    .diagram-hint {
+        font-size: 0.76rem;
+        padding: 8px 14px;
+    }
+
+    .detail-header {
+        padding: 20px 18px 16px;
+    }
+
+    .detail-body {
+        padding: 16px 18px 20px;
+    }
+
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .comparison-card {
+        padding: 22px;
+    }
+
+    .differences-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .facts-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .neuron-hero {
+        padding: 40px 12px 28px;
+    }
+
+    .page-section {
+        padding: 32px 12px;
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.88rem;
+    }
+
+    .diagram-container {
+        padding: 14px;
+        border-radius: var(--radius-lg);
+    }
+
+    .detail-panel {
+        border-radius: var(--radius-lg);
+    }
+
+    .detail-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2rem;
+    }
+
+    .detail-name {
+        font-size: 1.05rem;
+    }
+
+    .comparison-card {
+        padding: 18px;
+    }
+
+    .diff-card {
+        padding: 18px;
+    }
+
+    .fact-card {
+        padding: 18px;
+    }
+}
+
+@media (max-width: 360px) {
+    .nav-brand-text {
+        display: none;
+    }
+
+    .section-header {
+        margin-bottom: 32px;
+    }
+}
+
+/* Touch devices */
+@media (hover: none) and (pointer: coarse) {
+    .comparison-card:hover,
+    .diff-card:hover,
+    .fact-card:hover {
+        transform: none;
+    }
+
+    .neuron-svg .part-group:hover,
+    .network-svg .part-group:hover {
+        filter: none;
+    }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .reveal-section {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+
+    .part-pulse {
+        animation: none;
+    }
+
+    .diagram-hint {
+        animation: none;
+    }
+}

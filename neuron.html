@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biological vs Artificial Neuron | Activation Functions Explorer</title>
+    <meta name="description" content="Understand the connection between biological neurons and artificial neural networks. Interactive diagrams and analogies.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/neuron.css">
+</head>
+<body class="page-body">
+
+    <!-- Animated Background Orbs (Shared from styles.css) -->
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-brand-icon">🧠</span>
+            <span class="nav-brand-text">Activation<span class="gradient-text">Explorer</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <span class="nav-link-icon">🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="activations.html" class="nav-link">
+                <span class="nav-link-icon">📊</span>
+                <span>Functions</span>
+            </a>
+            <a href="neuron.html" class="nav-link active">
+                <span class="nav-link-icon">🧬</span>
+                <span>The Neuron</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="neuron-hero">
+        <div class="hero-content">
+            <h1 class="section-title">The <span class="gradient-text">Neuron</span> Connection</h1>
+            <p class="section-subtitle">How billions of years of biological evolution inspired the fundamental building blocks of modern Artificial Intelligence.</p>
+        </div>
+    </header>
+
+    <!-- 1. The Biological Neuron -->
+    <section class="page-section reveal-section">
+        <div class="section-header">
+            <span class="section-number">1</span>
+            <h2 class="section-title">The Biological Neuron</h2>
+            <p class="section-subtitle">The fundamental unit of the human brain. Click on the highlighted parts of the neuron below to discover their functions and AI equivalents.</p>
+        </div>
+
+        <div class="diagram-wrapper">
+            <!-- SVG Diagram Container -->
+            <div class="diagram-container">
+                <div class="diagram-hint">
+                    <span>👆</span> Click on different parts to explore
+                </div>
+                <!-- Abstract Representation of a Biological Neuron -->
+                <svg id="neuronSvg" class="neuron-svg" viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="axonGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                            <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.8" />
+                            <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.3" />
+                        </linearGradient>
+                    </defs>
+
+                    <!-- Dendrites -->
+                    <g class="part-group part-pulse" data-part="dendrites">
+                        <path d="M180,180 Q140,120 100,100 M180,220 Q140,280 100,300 M160,200 Q100,200 60,200 M190,160 Q160,80 180,40 M190,240 Q160,320 180,360" stroke="#10b981" stroke-width="8" stroke-linecap="round" fill="none" />
+                        <circle cx="100" cy="100" r="12" fill="#10b981" />
+                        <circle cx="100" cy="300" r="12" fill="#10b981" />
+                        <circle cx="60" cy="200" r="12" fill="#10b981" />
+                        <circle cx="180" cy="40" r="12" fill="#10b981" />
+                        <circle cx="180" cy="360" r="12" fill="#10b981" />
+                    </g>
+
+                    <!-- Soma -->
+                    <g class="part-group part-pulse" data-part="soma">
+                        <circle cx="220" cy="200" r="60" fill="#3b82f6" fill-opacity="0.2" stroke="#3b82f6" stroke-width="4" />
+                    </g>
+
+                    <!-- Nucleus -->
+                    <g class="part-group part-pulse" data-part="nucleus">
+                        <circle cx="220" cy="200" r="25" fill="#8b5cf6" />
+                    </g>
+
+                    <!-- Axon -->
+                    <g class="part-group part-pulse" data-part="axon">
+                        <path d="M280,200 L600,200" stroke="url(#axonGradient)" stroke-width="12" stroke-linecap="round" fill="none" />
+                    </g>
+
+                    <!-- Myelin Sheath -->
+                    <g class="part-group part-pulse" data-part="myelin">
+                        <rect x="300" y="185" width="40" height="30" rx="8" fill="#14b8a6" />
+                        <rect x="360" y="185" width="40" height="30" rx="8" fill="#14b8a6" />
+                        <rect x="420" y="185" width="40" height="30" rx="8" fill="#14b8a6" />
+                        <rect x="480" y="185" width="40" height="30" rx="8" fill="#14b8a6" />
+                        <rect x="540" y="185" width="40" height="30" rx="8" fill="#14b8a6" />
+                    </g>
+
+                    <!-- Axon Terminals -->
+                    <g class="part-group part-pulse" data-part="terminals">
+                        <path d="M600,200 Q640,160 680,140 M600,200 Q640,240 680,260 M600,200 Q650,200 700,200" stroke="#ec4899" stroke-width="6" stroke-linecap="round" fill="none" />
+                        <circle cx="680" cy="140" r="10" fill="#ec4899" />
+                        <circle cx="680" cy="260" r="10" fill="#ec4899" />
+                        <circle cx="700" cy="200" r="10" fill="#ec4899" />
+                    </g>
+                </svg>
+            </div>
+
+            <!-- Detail Panel -->
+            <div class="detail-panel" id="neuronDetail">
+                <div class="detail-panel-empty">
+                    <div class="empty-icon">🧠</div>
+                    <p>Select a part of the biological neuron to see how it works and how it translates to artificial neural networks.</p>
+                </div>
+                <div class="detail-panel-content">
+                    <div class="detail-header">
+                        <div class="detail-icon-row">
+                            <div class="detail-icon"></div>
+                            <div>
+                                <h3 class="detail-name"></h3>
+                                <span class="detail-tag"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-body">
+                        <p class="detail-description"></p>
+                        <div class="detail-analogy">
+                            <div class="detail-analogy-label">🤖 AI Equivalent</div>
+                            <div class="detail-analogy-text"></div>
+                            <div class="detail-math"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. The Artificial Neural Network -->
+    <section class="page-section reveal-section">
+        <div class="section-header">
+            <span class="section-number">2</span>
+            <h2 class="section-title">The Artificial Network</h2>
+            <p class="section-subtitle">How biological inspiration is structured in code. Explore the components of a simple deep learning network.</p>
+        </div>
+
+        <div class="diagram-wrapper reverse">
+            <!-- Detail Panel (Left side for variation) -->
+            <div class="detail-panel" id="networkDetail">
+                <div class="detail-panel-empty">
+                    <div class="empty-icon">🤖</div>
+                    <p>Select a component of the artificial neural network to learn about its role in deep learning.</p>
+                </div>
+                <div class="detail-panel-content">
+                    <div class="detail-header">
+                        <div class="detail-icon-row">
+                            <div class="detail-icon"></div>
+                            <div>
+                                <h3 class="detail-name"></h3>
+                                <span class="detail-tag"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="detail-body">
+                        <p class="detail-description"></p>
+                        <div class="detail-analogy">
+                            <div class="detail-analogy-label">🧠 Biological Equivalent</div>
+                            <div class="detail-analogy-text"></div>
+                            <div class="detail-math"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SVG Diagram Container -->
+            <div class="diagram-container">
+                <div class="diagram-hint">
+                    <span>👆</span> Click on different layers to explore
+                </div>
+                <svg id="networkSvg" class="network-svg" viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Connections / Weights -->
+                    <g class="part-group" data-part="weights">
+                        <!-- Input to Hidden 1 -->
+                        <path d="M120,150 L300,100 M120,150 L300,250 M120,150 L300,400" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <path d="M120,250 L300,100 M120,250 L300,250 M120,250 L300,400" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <path d="M120,350 L300,100 M120,350 L300,250 M120,350 L300,400" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <!-- Hidden 1 to Hidden 2 -->
+                        <path d="M300,100 L480,100 M300,100 L480,250 M300,100 L480,400" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <path d="M300,250 L480,100 M300,250 L480,250 M300,250 L480,400" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <path d="M300,400 L480,100 M300,400 L480,250 M300,400 L480,400" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <!-- Hidden 2 to Output -->
+                        <path d="M480,100 L680,200 M480,100 L680,300" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <path d="M480,250 L680,200 M480,250 L680,300" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                        <path d="M480,400 L680,200 M480,400 L680,300" stroke="#f59e0b" stroke-width="2" stroke-opacity="0.3" fill="none" />
+                    </g>
+
+                    <!-- Input Layer -->
+                    <g class="part-group part-pulse" data-part="inputLayer">
+                        <circle cx="120" cy="150" r="24" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="3" />
+                        <circle cx="120" cy="250" r="24" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="3" />
+                        <circle cx="120" cy="350" r="24" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="3" />
+                        <text x="120" y="420" fill="#10b981" font-size="14" font-family="Inter" text-anchor="middle" font-weight="600">Input</text>
+                    </g>
+
+                    <!-- Hidden Layers -->
+                    <g class="part-group part-pulse" data-part="hiddenLayer">
+                        <!-- Layer 1 -->
+                        <circle cx="300" cy="100" r="28" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="3" />
+                        <circle cx="300" cy="250" r="28" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="3" />
+                        <circle cx="300" cy="400" r="28" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="3" />
+                        <!-- Layer 2 -->
+                        <circle cx="480" cy="100" r="28" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="3" />
+                        <circle cx="480" cy="250" r="28" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="3" />
+                        <circle cx="480" cy="400" r="28" fill="#8b5cf6" fill-opacity="0.2" stroke="#8b5cf6" stroke-width="3" />
+                        <text x="390" y="470" fill="#8b5cf6" font-size="14" font-family="Inter" text-anchor="middle" font-weight="600">Hidden Layers</text>
+                    </g>
+
+                    <!-- Activation Functions -->
+                    <g class="part-group part-pulse" data-part="activation">
+                        <path d="M290,105 L300,105 L305,95 L310,95" stroke="#00d4ff" stroke-width="3" fill="none" />
+                        <path d="M290,255 L300,255 L305,245 L310,245" stroke="#00d4ff" stroke-width="3" fill="none" />
+                        <path d="M290,405 L300,405 L305,395 L310,395" stroke="#00d4ff" stroke-width="3" fill="none" />
+                        
+                        <path d="M470,105 L480,105 L485,95 L490,95" stroke="#00d4ff" stroke-width="3" fill="none" />
+                        <path d="M470,255 L480,255 L485,245 L490,245" stroke="#00d4ff" stroke-width="3" fill="none" />
+                        <path d="M470,405 L480,405 L485,395 L490,395" stroke="#00d4ff" stroke-width="3" fill="none" />
+                    </g>
+
+                    <!-- Biases -->
+                    <g class="part-group part-pulse" data-part="bias">
+                        <circle cx="300" cy="70" r="8" fill="#ec4899" />
+                        <circle cx="300" cy="220" r="8" fill="#ec4899" />
+                        <circle cx="300" cy="370" r="8" fill="#ec4899" />
+                        
+                        <circle cx="480" cy="70" r="8" fill="#ec4899" />
+                        <circle cx="480" cy="220" r="8" fill="#ec4899" />
+                        <circle cx="480" cy="370" r="8" fill="#ec4899" />
+                    </g>
+
+                    <!-- Output Layer -->
+                    <g class="part-group part-pulse" data-part="outputLayer">
+                        <circle cx="680" cy="200" r="32" fill="#ef4444" fill-opacity="0.2" stroke="#ef4444" stroke-width="3" />
+                        <circle cx="680" cy="300" r="32" fill="#ef4444" fill-opacity="0.2" stroke="#ef4444" stroke-width="3" />
+                        <text x="680" y="370" fill="#ef4444" font-size="14" font-family="Inter" text-anchor="middle" font-weight="600">Output</text>
+                    </g>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. Key Differences -->
+    <section class="page-section reveal-section">
+        <div class="section-header">
+            <h2 class="section-title">Bridging the Gap</h2>
+            <p class="section-subtitle">While inspired by biology, artificial neural networks simplify and abstract many complex biological processes.</p>
+        </div>
+
+        <div class="differences-grid">
+            <div class="diff-card">
+                <div class="diff-card-icon">⚡</div>
+                <h3 class="diff-card-title">Signal Type</h3>
+                <div class="diff-label bio">Biological</div>
+                <div class="diff-card-bio">Discrete binary electrical spikes (Action Potentials) occurring over time.</div>
+                <div class="diff-label ai">Artificial</div>
+                <div class="diff-card-ai">Continuous floating-point values computed statically in layers.</div>
+            </div>
+            <div class="diff-card">
+                <div class="diff-card-icon">🎓</div>
+                <h3 class="diff-card-title">Learning Mechanism</h3>
+                <div class="diff-label bio">Biological</div>
+                <div class="diff-card-bio">Hebbian learning, neuroplasticity, localized chemical changes over time.</div>
+                <div class="diff-label ai">Artificial</div>
+                <div class="diff-card-ai">Global optimization via Backpropagation and Gradient Descent.</div>
+            </div>
+            <div class="diff-card">
+                <div class="diff-card-icon">🕸️</div>
+                <h3 class="diff-card-title">Topology</h3>
+                <div class="diff-label bio">Biological</div>
+                <div class="diff-card-bio">Highly complex, recurrent, asynchronous, 3D spatial connections.</div>
+                <div class="diff-label ai">Artificial</div>
+                <div class="diff-card-ai">Rigid layers, mostly feed-forward, synchronized, abstract graphs.</div>
+            </div>
+            <div class="diff-card">
+                <div class="diff-card-icon">⏱️</div>
+                <h3 class="diff-card-title">Speed & Efficiency</h3>
+                <div class="diff-label bio">Biological</div>
+                <div class="diff-card-bio">Slow signals (~100m/s) but massively parallel. Runs on ~20 Watts.</div>
+                <div class="diff-label ai">Artificial</div>
+                <div class="diff-card-ai">Fast signals (speed of light) but relies on heavy GPU computation. High power use.</div>
+            </div>
+        </div>
+
+        <div class="facts-grid">
+            <div class="fact-card">
+                <div class="fact-icon">💡</div>
+                <div class="fact-text"><strong>Fun Fact:</strong> The human brain contains roughly <strong>86 billion neurons</strong> and over <strong>100 trillion synapses</strong> (connections). State-of-the-art AI models like GPT-4 have over 1 trillion parameters, approaching the raw scale of the brain, though functioning differently.</div>
+            </div>
+            <div class="fact-card">
+                <div class="fact-icon">🔄</div>
+                <div class="fact-text"><strong>Activation Functions:</strong> The biological equivalent of an activation function is the <strong>Action Potential Threshold</strong>. A biological neuron doesn't fire strongly or weakly — it fires completely or not at all, closer to a Step Function than a modern continuous ReLU.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="neuron-footer">
+        <p class="footer-text">🧠 Activation Functions Explorer &mdash; Bridging biology and deep learning.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/neuron.js" defer></script>
+</body>
+</html>

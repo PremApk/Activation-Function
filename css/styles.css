@@ -81,8 +81,8 @@ body {
 .orb {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.25;
+    /* filter: blur(100px); Removed to fix severe scroll/animation lag */
+    opacity: 0.15;
     animation: orbFloat 20s ease-in-out infinite;
     will-change: transform;
     contain: layout style;
@@ -203,7 +203,7 @@ body {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
-    backdrop-filter: blur(16px);
+    /* backdrop-filter removed for perf */
     animation: fadeInUp 0.8s ease-out 0.3s both;
 }
 
@@ -245,7 +245,7 @@ body {
     z-index: 100;
     padding: 16px 24px;
     background: rgba(6, 7, 13, 0.85);
-    backdrop-filter: blur(20px) saturate(1.5);
+    /* backdrop-filter removed for perf */
     border-bottom: 1px solid var(--border-subtle);
     transition: var(--transition-base);
 }
@@ -411,7 +411,7 @@ input[type="range"]::-moz-range-thumb {
     font-weight: 500;
     cursor: pointer;
     transition: all var(--transition-base);
-    backdrop-filter: blur(8px);
+    /* backdrop-filter removed for perf */
     white-space: nowrap;
 }
 
@@ -457,7 +457,7 @@ input[type="range"]::-moz-range-thumb {
     padding: 24px;
     cursor: pointer;
     transition: all var(--transition-base);
-    backdrop-filter: blur(12px);
+    /* backdrop-filter removed for perf */
     overflow: hidden;
     animation: cardEnter 0.5s ease-out both;
     contain: layout style;
@@ -595,7 +595,7 @@ input[type="range"]::-moz-range-thumb {
     inset: 0;
     z-index: 1000;
     background: rgba(2, 3, 8, 0.8);
-    backdrop-filter: blur(8px);
+    /* backdrop-filter removed for perf */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -657,7 +657,7 @@ input[type="range"]::-moz-range-thumb {
     justify-content: center;
     transition: all var(--transition-fast);
     z-index: 10;
-    backdrop-filter: blur(8px);
+    /* backdrop-filter removed for perf */
 }
 
 .modal-close:hover {

@@ -1,8 +1,8 @@
 <div align="center">
 
-# 🧠 Activation Functions Explorer
+# 🧠 Deep Learning Visualization and Learning
 
-### An interactive, visual guide to neural network activation functions
+### An interactive, visual guide to neural network activation functions and the biological vs artificial neuron connection
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Visit_Site-blueviolet?style=for-the-badge)](https://premapk.github.io/Activation-Function/)
 [![GitHub Pages](https://img.shields.io/badge/Hosted_on-GitHub_Pages-222?style=for-the-badge&logo=github)](https://premapk.github.io/Activation-Function/)
@@ -91,10 +91,17 @@ npx serve .
 
 ```
 Activation-Function/
-├── index.html      # Main HTML structure with hero, slider, cards grid, and modal
-├── styles.css      # Complete styling — dark theme, glassmorphism, animations
-├── app.js          # All logic — function database, rendering, charts, interactivity
-└── README.md       # You are here!
+├── css/
+│   ├── home.css        # Landing page styling
+│   ├── styles.css      # Activation explorer styling
+│   └── neuron.css      # Neuron page styling
+├── js/
+│   ├── app.js          # Logic for activation functions and charts
+│   └── neuron.js       # Logic for biological/artificial neuron interactions
+├── index.html          # Main landing page for the site
+├── activations.html    # Interactive activation functions explorer
+├── neuron.html         # Biological vs Artificial neuron guide
+└── README.md           # You are here!
 ```
 
 ---
