@@ -1,0 +1,240 @@
+/* css/ai_concepts.css */
+
+.hierarchy-container {
+    padding: 100px 2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    box-sizing: border-box;
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.hierarchy-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.hierarchy-layout {
+    display: flex;
+    gap: 3rem;
+    align-items: stretch;
+}
+
+.diagram-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 600px;
+    position: relative;
+    padding: 2rem;
+}
+
+.details-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    overflow-y: auto;
+    max-height: 800px;
+    padding-right: 1rem;
+}
+
+/* Scrollbar for details area */
+.details-area::-webkit-scrollbar {
+    width: 6px;
+}
+.details-area::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+.details-area::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+/* Concentric Circles Diagram */
+.circle-container {
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.circle-label {
+    font-weight: 700;
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    padding: 1rem;
+    z-index: 10;
+    transition: color 0.3s ease;
+    pointer-events: none; /* Let clicks pass through to the circle */
+}
+
+/* Base sizes and colors */
+.circle-ai {
+    width: 500px;
+    height: 500px;
+    background: rgba(16, 185, 129, 0.05); /* Green */
+    border-color: rgba(16, 185, 129, 0.3);
+    justify-content: flex-start;
+}
+.circle-ai .circle-label { color: #10b981; font-size: 1.1rem; }
+
+.circle-ml {
+    width: 400px;
+    height: 400px;
+    background: rgba(59, 130, 246, 0.1); /* Blue */
+    border-color: rgba(59, 130, 246, 0.4);
+    margin-top: 10px;
+}
+.circle-ml .circle-label { color: #3b82f6; font-size: 1.05rem; }
+
+.circle-dl {
+    width: 300px;
+    height: 300px;
+    background: rgba(139, 92, 246, 0.15); /* Purple */
+    border-color: rgba(139, 92, 246, 0.5);
+    margin-top: 10px;
+}
+.circle-dl .circle-label { color: #8b5cf6; font-size: 1rem; }
+
+.circle-genai {
+    width: 200px;
+    height: 200px;
+    background: rgba(236, 72, 153, 0.2); /* Pink */
+    border-color: rgba(236, 72, 153, 0.6);
+    margin-top: 10px;
+}
+.circle-genai .circle-label { color: #ec4899; font-size: 0.95rem; }
+
+.circle-llm {
+    width: 100px;
+    height: 100px;
+    background: rgba(245, 158, 11, 0.3); /* Orange */
+    border-color: rgba(245, 158, 11, 0.8);
+    margin-top: 10px;
+    justify-content: center;
+}
+.circle-llm .circle-label { color: #f59e0b; font-size: 0.9rem; padding: 0; }
+
+/* Hover States & Active States */
+.circle-container:hover, .circle-container.active {
+    box-shadow: 0 0 30px inset rgba(255, 255, 255, 0.1);
+    transform: scale(1.02);
+}
+
+.circle-ai:hover, .circle-ai.active { background: rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.8); }
+.circle-ml:hover, .circle-ml.active { background: rgba(59, 130, 246, 0.25); border-color: rgba(59, 130, 246, 0.8); }
+.circle-dl:hover, .circle-dl.active { background: rgba(139, 92, 246, 0.3); border-color: rgba(139, 92, 246, 0.8); }
+.circle-genai:hover, .circle-genai.active { background: rgba(236, 72, 153, 0.35); border-color: rgba(236, 72, 153, 0.8); }
+.circle-llm:hover, .circle-llm.active { background: rgba(245, 158, 11, 0.5); border-color: rgba(245, 158, 11, 1); }
+
+/* Dimming non-hovered elements */
+.diagram-area.is-hovering .circle-container:not(.active):not(:hover) {
+    opacity: 0.5;
+}
+
+/* Info Cards */
+.info-card {
+    background: var(--bg-card);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.info-card.active, .info-card:hover {
+    opacity: 1;
+    border-color: var(--primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transform: translateX(-5px);
+}
+
+.info-card-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.75rem;
+}
+
+.info-card-header h4 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: white;
+}
+
+.info-icon {
+    font-size: 1.5rem;
+}
+
+.info-body p {
+    color: var(--text-main);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.example-box {
+    background: rgba(0,0,0,0.2);
+    border-radius: 8px;
+    padding: 1rem;
+    border-left: 3px solid var(--primary);
+}
+
+.example-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.example-box ul {
+    margin: 0;
+    padding-left: 1.2rem;
+    color: var(--text-main);
+}
+
+.example-box li {
+    margin-bottom: 0.25rem;
+}
+
+/* Colored borders for active cards */
+#card-ai.active { border-left: 4px solid #10b981; }
+#card-ml.active { border-left: 4px solid #3b82f6; }
+#card-dl.active { border-left: 4px solid #8b5cf6; }
+#card-genai.active { border-left: 4px solid #ec4899; }
+#card-llm.active { border-left: 4px solid #f59e0b; }
+
+@media (max-width: 1024px) {
+    .hierarchy-layout {
+        flex-direction: column;
+    }
+    
+    .circle-ai {
+        width: 100%;
+        max-width: 400px;
+        height: 400px;
+    }
+    
+    .circle-ml { width: 80%; height: 80%; }
+    .circle-dl { width: 80%; height: 80%; }
+    .circle-genai { width: 80%; height: 80%; }
+    .circle-llm { width: 60%; height: 60%; }
+    
+    .info-card:hover {
+        transform: translateY(-5px);
+    }
+}

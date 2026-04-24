@@ -40,6 +40,10 @@ Click any function card to open a rich modal with:
 - **Limitations & Pitfalls** — when to avoid it
 - **Popular Models** — real-world LLMs and architectures using it (GPT-4, LLaMA, BERT, etc.)
 
+### 🧮 Parameter Visualizer
+- Enter an arbitrary number of parameters and instantly see how a neural network with that capacity is structured.
+- Optimized Canvas rendering engine that visually caps drawing lines but accurately scales and calculates the layers up to millions of parameters.
+
 ### 🎨 Premium Dark UI
 - Glassmorphism card design with animated gradient orbs
 - Smooth micro-animations and hover effects
@@ -92,16 +96,19 @@ npx serve .
 ```
 Activation-Function/
 ├── css/
-│   ├── home.css        # Landing page styling
-│   ├── styles.css      # Activation explorer styling
-│   └── neuron.css      # Neuron page styling
+│   ├── home.css            # Landing page styling
+│   ├── styles.css          # Activation explorer styling
+│   ├── neuron.css          # Neuron page styling
+│   └── parameters.css      # Parameter visualizer styling
 ├── js/
-│   ├── app.js          # Logic for activation functions and charts
-│   └── neuron.js       # Logic for biological/artificial neuron interactions
-├── index.html          # Main landing page for the site
-├── activations.html    # Interactive activation functions explorer
-├── neuron.html         # Biological vs Artificial neuron guide
-└── README.md           # You are here!
+│   ├── app.js              # Logic for activation functions and charts
+│   ├── neuron.js           # Logic for biological/artificial neuron interactions
+│   └── parameters.js       # Logic for network generation and canvas rendering
+├── index.html              # Main landing page for the site
+├── activations.html        # Interactive activation functions explorer
+├── neuron.html             # Biological vs Artificial neuron guide
+├── parameters.html         # Parameter visualizer page
+└── README.md               # You are here!
 ```
 
 ---

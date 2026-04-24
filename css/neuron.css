@@ -3,85 +3,6 @@
    Interactive educational page
    ============================================ */
 
-/* --- Shared Nav Bar --- */
-.site-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 200;
-    padding: 14px 24px;
-    background: rgba(6, 7, 13, 0.88);
-    /* backdrop-filter removed for perf */
-    border-bottom: 1px solid var(--border-subtle);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.nav-brand {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-    color: var(--text-primary);
-    font-weight: 700;
-    font-size: 1rem;
-    letter-spacing: -0.01em;
-}
-
-.nav-brand-icon {
-    font-size: 1.3rem;
-}
-
-.nav-brand-text .gradient-text {
-    background: var(--gradient-main);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.nav-links {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.nav-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 8px 18px;
-    border-radius: var(--radius-full);
-    font-size: 0.84rem;
-    font-weight: 500;
-    color: var(--text-secondary);
-    text-decoration: none;
-    border: 1px solid transparent;
-    transition: all var(--transition-base);
-}
-
-.nav-link:hover {
-    color: var(--text-primary);
-    background: var(--bg-card);
-    border-color: var(--border-light);
-}
-
-.nav-link.active {
-    color: var(--accent-cyan);
-    background: rgba(0, 212, 255, 0.08);
-    border-color: rgba(0, 212, 255, 0.2);
-}
-
-.nav-link-icon {
-    font-size: 0.95rem;
-}
-
-/* --- Page Body Offset for Fixed Nav --- */
-.page-body {
-    padding-top: 60px;
-}
-
 /* --- Neuron Hero --- */
 .neuron-hero {
     position: relative;
@@ -580,26 +501,6 @@
 }
 
 @media (max-width: 768px) {
-    .site-nav {
-        padding: 10px 16px;
-    }
-
-    .nav-brand {
-        font-size: 0.9rem;
-    }
-
-    .nav-link {
-        padding: 7px 12px;
-        font-size: 0.78rem;
-    }
-
-    .nav-link span:not(.nav-link-icon) {
-        display: none;
-    }
-
-    .nav-link-icon {
-        font-size: 1.1rem;
-    }
 
     .neuron-hero {
         padding: 50px 16px 36px;
@@ -697,10 +598,6 @@
 }
 
 @media (max-width: 360px) {
-    .nav-brand-text {
-        display: none;
-    }
-
     .section-header {
         margin-bottom: 32px;
     }

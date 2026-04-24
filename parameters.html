@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parameter Visualizer | Deep Learning Visualization</title>
+    <meta name="description" content="Instantly visualize the scale of neural networks by entering any parameter count.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/parameters.css">
+</head>
+<body class="page-body">
+
+    <!-- Shared Background Orbs -->
+    <div class="bg-orbs" aria-hidden="true">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <a href="index.html" class="nav-brand">
+            <span class="nav-brand-icon">🧮</span>
+            <span class="nav-brand-text">Parameter<span class="gradient-text">Visualizer</span></span>
+        </a>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">
+                <span class="nav-link-icon">🏠</span>
+                <span>Home</span>
+            </a>
+            <a href="ai_concepts.html" class="nav-link">
+                <span class="nav-link-icon">📚</span>
+                <span>AI Concepts</span>
+            </a>
+            <a href="activations.html" class="nav-link">
+                <span class="nav-link-icon">📊</span>
+                <span>Functions</span>
+            </a>
+            <a href="neuron.html" class="nav-link">
+                <span class="nav-link-icon">🧬</span>
+                <span>The Neuron</span>
+            </a>
+            <a href="parameters.html" class="nav-link active">
+                <span class="nav-link-icon">🧮</span>
+                <span>Parameters</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="visualizer-container">
+        
+        <!-- Controls -->
+        <header class="controls-header">
+            <div class="config-controls">
+                <div class="input-group preset-group">
+                    <label for="presetSelect">Configuration:</label>
+                    <select id="presetSelect" class="preset-select">
+                        <option value="custom">Custom (Enter below)</option>
+                        <optgroup label="Small / Learning Architectures">
+                            <option value="100,2">Tiny Toy Network (100 params)</option>
+                            <option value="1000,2">Small Dense (1K params)</option>
+                            <option value="10000,3">Medium Dense (10K params)</option>
+                            <option value="60000,3">LeNet-5 Approx (60K params)</option>
+                        </optgroup>
+                        <optgroup label="Larger Architectures">
+                            <option value="100000,4">Large Dense (100K params)</option>
+                            <option value="500000,5">Sparse-like Base (500K params)</option>
+                            <option value="1000000,6">Mega Network (1M params)</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="paramInput">Number of Parameters:</label>
+                    <input type="number" id="paramInput" min="1" max="10000000" value="100" placeholder="e.g. 1000">
+                    
+                    <label for="hiddenLayersInput" style="margin-left: 1rem;">Hidden Layers:</label>
+                    <input type="number" id="hiddenLayersInput" min="1" max="20" value="2" placeholder="e.g. 2" style="width: 80px;">
+                    
+                    <button id="drawBtn" class="btn-primary">Visualize</button>
+                </div>
+            </div>
+            
+            <div class="stats-panel" id="statsPanel">
+                <div class="stat-box">
+                    <span class="stat-title">Requested</span>
+                    <span class="stat-value" id="valRequested">100</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-title">Actual Rendered</span>
+                    <span class="stat-value highlight" id="valActual">100</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-title">Architecture</span>
+                    <span class="stat-value arch" id="valArch">Input → Output</span>
+                </div>
+            </div>
+
+            <div class="legend-panel" id="legendPanel">
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #10b981;"></span>
+                    <span>Input Nodes: <strong id="legendInput">0</strong></span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #8b5cf6;"></span>
+                    <span>Hidden Nodes: <strong id="legendHidden">0</strong></span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color" style="background-color: #ef4444;"></span>
+                    <span>Output Nodes: <strong id="legendOutput">0</strong></span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Canvas Area -->
+        <div class="canvas-wrapper">
+            <canvas id="paramCanvas"></canvas>
+            <div id="loadingOverlay" class="loading-overlay hidden">
+                <div class="spinner"></div>
+                <span>Rendering Network...</span>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="js/parameters.js"></script>
+</body>
+</html>
