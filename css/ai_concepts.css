@@ -65,6 +65,7 @@
     transition: all 0.3s ease;
     cursor: pointer;
     border: 2px solid rgba(255, 255, 255, 0.1);
+    aspect-ratio: 1 / 1;
 }
 
 .circle-label {
@@ -223,10 +224,15 @@
         flex-direction: column;
     }
     
+    .diagram-area {
+        min-height: auto;
+        padding: 1rem 0;
+    }
+    
     .circle-ai {
         width: 100%;
+        height: auto;
         max-width: 400px;
-        height: 400px;
     }
     
     .circle-ml { width: 80%; height: 80%; }
@@ -236,5 +242,19 @@
     
     .info-card:hover {
         transform: translateY(-5px);
+    }
+}
+
+@media (max-width: 480px) {
+    .hierarchy-container {
+        padding: 120px 1rem 1rem;
+    }
+    .circle-label {
+        font-size: 0.75rem !important;
+        padding: 0.5rem;
+    }
+    .details-area {
+        max-height: none;
+        overflow: visible;
     }
 }

@@ -237,6 +237,22 @@ canvas {
     }
     .stats-panel {
         flex-direction: column;
+        align-items: flex-start;
         gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .visualizer-container {
+        padding: 120px 1rem 1rem;
+    }
+    .input-group input {
+        width: 100%;
+    }
+    .preset-select {
+        max-width: 100%;
+    }
+    .canvas-wrapper {
+        min-height: 300px;
     }
 }

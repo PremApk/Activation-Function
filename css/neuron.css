@@ -501,6 +501,10 @@
 }
 
 @media (max-width: 768px) {
+    .reveal-section {
+        opacity: 1 !important;
+        transform: translateY(0) !important;
+    }
 
     .neuron-hero {
         padding: 50px 16px 36px;

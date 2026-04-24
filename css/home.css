@@ -241,3 +241,16 @@ body, html {
         padding: 2rem 1.5rem;
     }
 }
+
+@media (max-width: 480px) {
+    .hero-container {
+        padding: 1.5rem 1rem;
+    }
+    .main-title {
+        font-size: 2rem;
+    }
+    .subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 2rem;
+    }
+}
