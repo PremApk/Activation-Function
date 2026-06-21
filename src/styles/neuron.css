@@ -1,7 +1,4 @@
-/* ============================================
-   NEURON BASICS PAGE - STYLES
-   Interactive educational page
-   ============================================ */
+/* src/styles/neuron.css */
 
 /* --- Neuron Hero --- */
 .neuron-hero {
@@ -81,7 +78,6 @@
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
     padding: 32px;
-    /* backdrop-filter removed for perf */
     position: relative;
     overflow: hidden;
 }
@@ -144,7 +140,6 @@
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-xl);
-    /* backdrop-filter removed for perf */
     overflow: hidden;
     transition: all var(--transition-slow);
     position: sticky;
@@ -281,7 +276,6 @@
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     padding: 28px;
-    /* backdrop-filter removed for perf */
     transition: all var(--transition-base);
     animation: cardEnter 0.5s ease-out both;
 }
@@ -364,7 +358,6 @@
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-lg);
     padding: 24px;
-    /* backdrop-filter removed for perf */
     transition: all var(--transition-base);
 }
 
@@ -504,6 +497,7 @@
     .reveal-section {
         opacity: 1 !important;
         transform: translateY(0) !important;
+        transition: none !important;
     }
 
     .neuron-hero {
